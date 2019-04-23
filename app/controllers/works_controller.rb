@@ -13,7 +13,7 @@ class WorksController < ApplicationController
 
     success = @work.save
     if success
-      redirct_to works_path
+      redirect_to works_path
     else
       render :new
     end
