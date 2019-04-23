@@ -1,5 +1,7 @@
 class Work < ApplicationRecord
 
+validates :title, presence: true
+
   def self.top(category)
     all_category = Work.where(category: category)
     top_ten = all_category.sample(10)

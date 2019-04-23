@@ -18,6 +18,12 @@ describe WorksController do
       get work_path(works(:summer).id)
       must_respond_with :ok
     end
+
+    it "returns a 404 status code if the work doesn't exist" do
+      get work_path(-1)
+      must_respond_with :not_found
+    end
+
   end
 
   describe "new" do
@@ -47,6 +53,22 @@ describe WorksController do
       must_redirect_to works_path
     end
 
+    it "doesn't create new work with data that is invalid" do
+      work_data = {
+        work: {
+          title: "",
+        },
+      }
+
+      expect(Work.new(work_data[:work])).wont_be :valid?
+
+      expect {
+        post works_path, params: work_data
+      }.wont_change "Work.count"
+
+    end
+
+
 
   end 
 
@@ -56,9 +78,9 @@ describe WorksController do
       must_respond_with :ok
     end
 
-    it "responds with NOT FOUND for a fake book" do
+    it "responds with NOT FOUND for non existent work" do
       get edit_work_path(-1)
-      must_respond_with :redirect
+      must_respond_with :not_found
     end
 
   end
@@ -80,6 +102,19 @@ describe WorksController do
       expect(works(:call).category).must_equal(work_data[:work][:category])
 
     end
+
+    it "does not update for bad input data" do
+      work_data = {
+        work: {
+          category: ""
+        }
+      }
+
+      patch work_path(works(:call)), params: work_data
+      must_respond_with :redirect
+    end
+
+
   end
 
   describe "destroy" do
@@ -95,6 +130,16 @@ describe WorksController do
 
       deleted_work = Work.find_by(id: works(:testing).id)
       expect(deleted_work).must_be_nil
+    end
+
+    it "returns a 404 if the book does not exist" do
+  
+      expect(Work.find_by(id: -1)).must_be_nil
+      expect {
+        delete work_path(-1)
+      }.wont_change "Work.count"
+
+      must_respond_with :not_found
     end
   end
 

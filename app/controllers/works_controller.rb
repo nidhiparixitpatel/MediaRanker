@@ -32,7 +32,7 @@ class WorksController < ApplicationController
     @work = Work.find_by(id: params[:id])
 
     if !@work
-      redirect_to works_path
+      head :not_found
     end
   end
 
@@ -47,7 +47,7 @@ class WorksController < ApplicationController
         render :edit
       end
     else
-      redirect_to works_path
+      head :not_found
     end
   end
 
@@ -59,7 +59,7 @@ class WorksController < ApplicationController
       work.destroy
       redirect_to works_path
     else
-      redirect_to works_path
+      head :not_found
     end
   end
 
