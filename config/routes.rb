@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # get 'works/show'
 
 
-  # root "homepages#index"
+  root "homepages#index"
   
   resources :works
 

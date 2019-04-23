@@ -20,6 +20,12 @@ class WorksController < ApplicationController
   end
 
   def show
+    work_id = params[:id]
+    @work = Work.find_by(id: work_id)
+
+    if !@work
+      head :not_found
+    end
   end
 
 private
