@@ -4,6 +4,10 @@ class UsersController < ApplicationController
 
   end
 
+  def index
+    @works = Work.all
+  end
+
   def login
     username = params[:user][:username]
     user = User.find_by(username: username)
