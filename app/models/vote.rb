@@ -1,9 +1,8 @@
 class Vote < ApplicationRecord
-  belongs_to :driver
-  belongs_to :passenger
+  belongs_to :user
+  belongs_to :work
 
-  def self.list(type)
-    @votes = Vote.where()
+  def self.user(user)
   end
 
 end

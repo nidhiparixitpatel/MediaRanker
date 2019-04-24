@@ -30,6 +30,11 @@ class UsersController < ApplicationController
       flash[:error] = "You must be logged in to see this page"
       redirect_to root_path
     end
+
+  end
+
+  def self.current
+    return @current_user
   end
 
   def logout
