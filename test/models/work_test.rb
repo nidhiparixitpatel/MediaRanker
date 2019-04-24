@@ -7,6 +7,19 @@ describe Work do
     expect(result).must_equal true
   end
 
+  it "is not valid for a work without a title" do
+    work_data = {
+      work: {
+        category: "book",
+        title: "",
+        creator: "Andre Aciman",
+        publication_year: 2015,
+        description: "book i just read"
+      }
+    }
+    expect(Work.new(work_data[:work])).wont_be :valid?
+  end
+
   it "returns a random work for spotlight method" do
     expect(Work.spotlight).must_be_instance_of Work
   end
@@ -14,6 +27,17 @@ describe Work do
   it "spotlight method works with no works" do
     Work.delete_all
     expect(Work.spotlight).must_be_nil
+  end
+
+  it "top method works" do
+    expect(Work.top("book")).must_be_instance_of Array
+    expect(Work.top("book").first).must_be_instance_of Work
+  end
+
+  it "top method works with no works" do
+    Work.delete_all
+    expect(Work.top("book")).must_be_instance_of Array
+    expect(Work.top("book").first).must_be_nil
   end
 
 end
