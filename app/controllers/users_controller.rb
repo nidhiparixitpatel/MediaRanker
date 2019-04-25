@@ -4,6 +4,16 @@ class UsersController < ApplicationController
 
   end
 
+  def show
+    user_id = params[:id]
+    @user = User.find_by(id: user_id)
+
+    if !@user
+      head :not_found
+    end
+
+  end
+
   def index
     @works = Work.all
   end
