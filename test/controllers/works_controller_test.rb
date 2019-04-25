@@ -78,7 +78,7 @@ describe WorksController do
       must_respond_with :ok
     end
 
-    it "responds with NOT FOUND for non existent work" do
+    it "responds with not found for non existent work" do
       get edit_work_path(-1)
       must_respond_with :not_found
     end
@@ -119,12 +119,12 @@ describe WorksController do
 
   describe "destroy" do
     it "removes the work from the database" do
-      # Act
+  
       expect {
         delete work_path(works(:testing))
       }.must_change "Work.count", -1
 
-      # Assert
+      
       must_respond_with :redirect
       must_redirect_to works_path
 

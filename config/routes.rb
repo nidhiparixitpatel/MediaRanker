@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get "/users/current", to: "users#current", as: "current_user"
   get "/users", to: "users#index", as: "users"
 
+  post "/works/:id", to: "votes#create", as: "vote"
+
 
     # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # end

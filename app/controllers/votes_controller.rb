@@ -5,13 +5,16 @@ class VotesController < ApplicationController
   end
 
   def create
-    @work = 
-    @user = User.current
+    work = Work.find_by(id: params[:id])
+    user = User.find_by(id: session[:user_id])
 
-    @vote = Vote.new(date: Date.today, users_id: @user.id, works_id: )
 
-    success = @vote.save
+    vote = Vote.new(date: Date.today, user_id: user.id, work_id: work.id )
+    logger.info "THIS IS THE WORK #{work.id}"
+    logger.info "THIS IS THE USER #{user.id}"
+    success = vote.save!
     if success
+      flash[:success] = "Upvoted successfully"
       redirect_to work_path
     else
       render :new
@@ -21,7 +24,7 @@ class VotesController < ApplicationController
   private
 
   def vote_params
-    return params.require(:vote).permit(:works_id)
+    return params.require(:vote).permit(:id)
   end
 
 
