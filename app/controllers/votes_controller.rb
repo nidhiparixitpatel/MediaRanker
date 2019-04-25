@@ -10,14 +10,13 @@ class VotesController < ApplicationController
 
 
     vote = Vote.new(date: Date.today, user_id: user.id, work_id: work.id )
-    logger.info "THIS IS THE WORK #{work.id}"
-    logger.info "THIS IS THE USER #{user.id}"
-    success = vote.save!
+    success = vote.save
     if success
       flash[:success] = "Upvoted successfully"
       redirect_to work_path
     else
-      render :new
+      flash[:error] = "Upvote was not successful"
+      redirect_to work_path
     end
   end
 

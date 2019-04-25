@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @works = Work.all
+    @users = User.all
   end
 
   def login

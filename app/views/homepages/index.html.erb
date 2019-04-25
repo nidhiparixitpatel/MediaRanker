@@ -4,7 +4,8 @@
 
 <% if @works.length > 0 %>
 <p><b><%= link_to @spotlight.title, work_path(@spotlight) %></b> 
-    by <%= @spotlight.creator %>
+    by <%= @spotlight.creator %> 
+    <%= @spotlight.votes.count %> Votes
 </p>
 
 <h2>Albums</h2>
