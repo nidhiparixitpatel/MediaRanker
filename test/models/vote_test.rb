@@ -5,7 +5,7 @@ describe Vote do
   let(:user) { user(:niv)}
 
   # it "must be valid" do
-  #   vote = Vote.new(date: Date.today, user_id: user.id, work_id: work.id)
+  #   vote = Vote.new(date: Date.today, work_id: work.id, user_id: user.id)
   #   value(vote).must_be :valid?
   # end
 

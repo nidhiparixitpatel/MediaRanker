@@ -33,8 +33,7 @@ class ActiveSupport::TestCase
       }
     }
     post login_path, params: login_data
-    puts "#{user.username}"
-    puts "session #{session[:user_id]} database #{user.id}"
+  
     # Verify the user ID was saved - if that didn't work, this test is invalid
     expect(session[:user_id]).must_equal user.id
 
