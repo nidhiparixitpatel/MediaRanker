@@ -5,7 +5,7 @@ class VotesController < ApplicationController
   end
 
   def create
-    work = Work.find_by(id: params[:id])
+    work = Work.find_by(id: params[:work_id])
     user = User.find_by(id: session[:user_id])
 
 
@@ -23,7 +23,7 @@ class VotesController < ApplicationController
   private
 
   def vote_params
-    return params.require(:vote).permit(:id)
+    return params.require(:vote).permit(:work_id)
   end
 
 
