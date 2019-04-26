@@ -21,7 +21,6 @@ class VotesController < ApplicationController
         flash[:error] = "You have to be logged in to vote!"
         redirect_to work_path
       end
-
   end
 
   private
