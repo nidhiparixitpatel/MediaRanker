@@ -4,7 +4,8 @@ class Work < ApplicationRecord
 
   def self.top(category)
     all_category = Work.where(category: category)
-    top_ten = all_category.sample(10)
+    work_votes = all_category.sort_by{|work| work.votes.length}.reverse
+    top_ten = work_votes[0,9]
     return top_ten
   end
 
