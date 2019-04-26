@@ -56,7 +56,41 @@ describe UsersController do
       must_respond_with :redirect
     end
 
+    it "does not log in for no username sent in" do
+      user_data = {
+        user: {
+          username: ""
+        }
+      }
+      expect {
+        post login_path, params: user_data
+      }.wont_change "User.count"
+
+      must_respond_with :redirect
+    end
+
   end
 
+  describe "logout" do
+    it "logs out successfully for a logged in user" do
+      perform_login
+      post logout_path
+      expect(session[:user_id]).must_be_nil
+    end
+
+    it "logs out successfully for a no user logged in" do
+      post logout_path
+      expect(session[:user_id]).must_be_nil
+    end
+
+  end
+
+  describe "current" do
+    it "returns 200 OK for a logged-in user" do
+      perform_login
+      get current_user_path
+      must_respond_with :success
+    end
+  end
 
 end
