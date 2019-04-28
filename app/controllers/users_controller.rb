@@ -43,10 +43,6 @@ class UsersController < ApplicationController
 
   end
 
-  def self.current
-    return @current_user
-  end
-
   def logout
     session[:user_id] = nil
     flash[:success] = "You have successfully logged out"
