@@ -1,11 +1,21 @@
  <h1>List of Users</h1>
 
-<ul>
-<% if @users%>
-  <% @users.each do |user| %>
 
-    <li> <%= link_to user.username, user_path(user) %> </li>
-
-  <% end %>
-<% end %>
-</ul>
+<table>
+ <thead>
+  <th>Username</th>
+  <th>Votes</th>
+  <th>Joined</th>
+  </thead>
+  <tbody>
+    <% if @users%>
+    <% @users.each do |user| %>
+    <tr>
+      <td><%= link_to user.username, user_path(user) %></td>
+      <td> <%= user.votes.length %> </td>
+      <td> <%= user.created_at %> </td>
+    </tr>
+    <% end %>
+     <% end %>
+  </tbody>
+</table>
