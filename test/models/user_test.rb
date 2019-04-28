@@ -11,8 +11,8 @@ describe User do
         username: "",
       }
     }
-    expect(User.new(user_data[:user])).wont_be :valid?
+    expect(User.create(user_data[:user])).wont_be :valid?
   end
-  
+
 
 end

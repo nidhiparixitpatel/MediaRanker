@@ -17,7 +17,7 @@ describe Work do
         description: "book i just read"
       }
     }
-    expect(Work.new(work_data[:work])).wont_be :valid?
+    expect(Work.create(work_data[:work])).wont_be :valid?
   end
 
   it "returns a random work for spotlight method" do
@@ -34,10 +34,23 @@ describe Work do
     expect(Work.top("book").first).must_be_instance_of Work
   end
 
-  it "top method works with no works" do
+  it "top method returns empty arrays with no works" do
     Work.delete_all
     expect(Work.top("book")).must_be_instance_of Array
     expect(Work.top("book").first).must_be_nil
   end
+
+  it "top method works in the case of a tie " do
+    20.times do
+      tie = Work.create(title:"tie test", category: "book")
+      Vote.create(user_id: users(:niv).id, work_id: tie.id)
+    end
+
+    expect(Work.top("book")).must_be_instance_of Array
+    expect(Work.top("book").first).must_be_instance_of Work
+    expect(Work.top("book").length).must_equal 10
+    expect(Work.top("book").first.title).must_equal "tie test"
+  end
+
 
 end
