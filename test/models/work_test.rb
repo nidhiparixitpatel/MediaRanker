@@ -25,7 +25,7 @@ describe Work do
   end
 
   it "spotlight method works with no works" do
-    Work.delete_all
+    # Work.delete_all
     expect(Work.spotlight).must_be_nil
   end
 
